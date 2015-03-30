@@ -5,7 +5,7 @@
     * @backupGlobals disabled
     */
 
-    $DB = new PDO('pgsql:host=localhost;dbname = adventure');
+    $DB = new PDO('pgsql:host=localhost;dbname = travel_test');
 
     require_once "src/Adventure.php";
 
@@ -107,7 +107,10 @@
             $this->assertEquals([], $result);
         }
 
-
+        function test_search()
+        {
+            $name= "I"
+        }
     }
 
 
