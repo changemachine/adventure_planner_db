@@ -11,10 +11,10 @@
 
     class ActivityTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Activity::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Activity::deleteAll();
+        }
 
         function test_setId()
         {
@@ -44,5 +44,21 @@
             //Assert
             $this->assertEquals($new_name, $result);
         }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            //Act
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals($test_activity, $result[0]);
+        }
+
+
 
     }
