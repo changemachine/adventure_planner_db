@@ -35,5 +35,3 @@ Adventure Feedback:
 
 Personalize the adventure of your choice:
     => Price calculator:
-
-Hello!
