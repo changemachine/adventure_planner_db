@@ -59,6 +59,41 @@
             $this->assertEquals($test_activity, $result[0]);
         }
 
+        function test_getAll()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+            $name2 = "sightseeing";
+            $test_activity2 = new Activity($name2);
+            $test_activity2->save();
+
+            //Act
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals([$test_activity, $test_activity2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+            $name2 = "sightseeing";
+            $test_activity2 = new Activity($name2);
+            $test_activity2->save();
+
+            //Act
+            Activity::deleteAll();
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
 
 
     }
