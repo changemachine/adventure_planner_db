@@ -1,0 +1,37 @@
+Minimum Usability:
+
+Create an adventure-
+    Iron Lung Adventure involves biking, running, kayaking.
+        Adventure runs from Canada through USA to Mexico.
+
+
+
+kayaking - Canada, USA, Mexico -> Iron Lung
+USA - Iron Lung Adventure -> kayaking
+Iron Lung Adventure -> USA, involves kayaking
+
+Create an Adventure-
+    Running Stomach involves eating at a restaurant in Rome, and running to Paris.
+        Adventure runs from Italy to France.
+
+Create an Adventure-
+    Mexico Tomale kayak involves eating a bunch of tomales in Chihuahua mexico, and then
+    kayaking to the pacific.
+        Adventure runs in Mexico.
+
+eating - Mexico, Italy -> Running Stomach/Mexico Tomale
+
+
+Icebox Features:
+
+Lookup
+Searching for hotels and flights to your adventure:
+
+Recomend an Adventure:
+User fills out a preferences form and feature recommends an adventure based upon the
+activities and countries that the user liked.
+
+Adventure Feedback:
+
+Personalize the adventure of your choice:
+    => Price calculator:
