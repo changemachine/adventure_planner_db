@@ -114,9 +114,7 @@
 
         function test_search()
         {
-<<<<<<< HEAD
-            $name= "I";
-=======
+
             $name= "Ironman";
             $test_adventure = new Adventure($name);
             $test_adventure->save();
@@ -266,7 +264,7 @@
             $result = $test_adventure->getCountries();
 
             $this->assertEquals([$test_country1], $result);
->>>>>>> 4aeadf190d88095c6b4d336774aeb0c5c732a11c
+
         }
     }
 

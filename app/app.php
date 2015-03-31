@@ -18,10 +18,10 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodparameterOverride();
 
-    $app->get("/", function(){
-        return "Hello World";
+    $app->get("/", function() use ($app) {
+        return $app['twig']->render("Home.html.twig");
     });
-    
+
     return $app;
 
  ?>
