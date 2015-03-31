@@ -92,97 +92,109 @@
             $test_location = new Location($lat, $long, $activity_id, $id);
             $test_location->save();
             //Act
-            $result = Activity::getAll();
+            $result = Location::getAll();
 
             //Assert
-            $this->assertEquals($test_activity, $result[0]);
+            $this->assertEquals($test_location, $result[0]);
         }
 
         function test_getAll()
         {
             //Arrange
-            $name = "eating";
-            $test_activity = new Activity($name);
-            $test_activity->save();
-            $name2 = "sightseeing";
-            $test_activity2 = new Activity($name2);
-            $test_activity2->save();
+            $lat = 1.1;
+            $long = 4.4;
+            $activity_id = 3;
+            $id = 1;
+            $test_location = new Location($lat, $long, $activity_id, $id);
+            $test_location->save();
 
+            $lat2 = 1.4;
+            $long2 = 4.1;
+            $activity_id2 = 2;
+            $id2 = 3;
+            $test_location2 = new Location($lat2, $long2, $activity_id2, $id2);
+            $test_location2->save();
             //Act
-            $result = Activity::getAll();
+            $result = Location::getAll();
 
             //Assert
-            $this->assertEquals([$test_activity, $test_activity2], $result);
+            $this->assertEquals([$test_location, $test_location2], $result);
         }
 
         function test_deleteAll()
         {
             //Arrange
-            $name = "eating";
-            $test_activity = new Activity($name);
-            $test_activity->save();
-            $name2 = "sightseeing";
-            $test_activity2 = new Activity($name2);
-            $test_activity2->save();
+            $lat = 1.1;
+            $long = 4.4;
+            $activity_id = 3;
+            $id = 1;
+            $test_location = new Location($lat, $long, $activity_id, $id);
+            $test_location->save();
 
+            $lat2 = 1.4;
+            $long2 = 4.1;
+            $activity_id2 = 2;
+            $id2 = 3;
+            $test_location2 = new Location($lat2, $long2, $activity_id2, $id2);
+            $test_location2->save();
             //Act
-            Activity::deleteAll();
-            $result = Activity::getAll();
+            Location::deleteAll();
+            $result = Location::getAll();
 
             //Assert
             $this->assertEquals([], $result);
         }
 
-        function test_find()
-        {
-            //Arrange
-            $name = "eating";
-            $test_activity = new Activity($name);
-            $test_activity->save();
-            $name2 = "sightseeing";
-            $test_activity2 = new Activity($name2);
-            $test_activity2->save();
-
-            //Act
-            $result = Activity::find($test_activity2->getId());
-
-            //Assert
-            $this->assertEquals($test_activity2, $result);
-        }
-
-        function test_update()
-        {
-            //Arrange
-            $name = "eating";
-            $test_activity = new Activity($name);
-            $test_activity->save();
-            $new_name = "cycling";
-
-            //Act
-            $test_activity->update($new_name);
-            $result = $test_activity->getName();
-
-            //Assert
-            $this->assertEquals($new_name, $result);
-        }
-
-        function test_delete()
-        {
-            //Arrange
-            $lat = 1.1;
-            $test_lat = new Location($lat);
-            $test_lat->save();
-            $lat2 = 1.2;
-            $test_lat2 = new Location($lat2);
-            $test_lat2->save();
-
-            //Act
-            $test_lat2->delete();
-            $result = Location::getAll();
-
-            //Assert
-            $this->assertEquals([$test_lat], $result);
-        }
+        // function test_find()
+        // {
+        //     //Arrange
+        //     $name = "eating";
+        //     $test_activity = new Activity($name);
+        //     $test_activity->save();
+        //     $name2 = "sightseeing";
+        //     $test_activity2 = new Activity($name2);
+        //     $test_activity2->save();
+        //
+        //     //Act
+        //     $result = Activity::find($test_activity2->getId());
+        //
+        //     //Assert
+        //     $this->assertEquals($test_activity2, $result);
+        // }
+        //
+        // function test_update()
+        // {
+        //     //Arrange
+        //     $name = "eating";
+        //     $test_activity = new Activity($name);
+        //     $test_activity->save();
+        //     $new_name = "cycling";
+        //
+        //     //Act
+        //     $test_activity->update($new_name);
+        //     $result = $test_activity->getName();
+        //
+        //     //Assert
+        //     $this->assertEquals($new_name, $result);
+        // }
+        //
+        // function test_delete()
+        // {
+        //     //Arrange
+        //     $lat = 1.1;
+        //     $test_lat = new Location($lat);
+        //     $test_lat->save();
+        //     $lat2 = 1.2;
+        //     $test_lat2 = new Location($lat2);
+        //     $test_lat2->save();
+        //
+        //     //Act
+        //     $test_lat2->delete();
+        //     $result = Location::getAll();
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_lat], $result);
+        // }
 
 
 

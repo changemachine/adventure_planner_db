@@ -165,7 +165,7 @@
             $result = $test_activity->getAdventures();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_adventure], $result);
         }
 
         function test_addCountry()
@@ -184,7 +184,7 @@
             $result = $test_activity->getCountries();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_country], $result);
         }
 
         function test_getAdventures()
@@ -193,9 +193,10 @@
             $name = "eating";
             $test_activity = new Activity($name);
             $test_activity->save();
-            $name2 = "sightseeing";
-            $test_activity2 = new Activity($name2);
-            $test_activity2->save();
+
+            $name2 = "snorkeling in hawaii";
+            $test_adventure2 = new Adventure($name2);
+            $test_adventure2->save();
 
             $adventure = "kitesurfing in hawaii";
             $test_adventure = new Adventure($adventure);
@@ -203,11 +204,11 @@
 
             //Act
             $test_activity->addAdventure($test_adventure);
-            $test_activity2->addAdventure($test_adventure);
+            $test_activity->addAdventure($test_adventure2);
             $result = $test_activity->getAdventures();
 
             //Assert
-            $this->assertEquals([$test_activity, $test_activity2], $result);
+            $this->assertEquals([$test_adventure, $test_adventure2], $result);
         }
 
         function test_getCountries()
@@ -231,7 +232,7 @@
             $result = $test_activity->getCountries();
 
             //Assert
-            $this->assertEquals([$test_activity, $test_country2], $result);
+            $this->assertEquals([$test_country, $test_country2], $result);
         }
 
         function test_deleteAdvAssoc()
@@ -250,11 +251,12 @@
 
             //Act
             $test_activity->addAdventure($test_adventure);
+            $test_activity2->addAdventure($test_adventure);
             $test_activity2->delete();
             $result = $test_activity->getAdventures();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_adventure], $result);
         }
 
         function test_deleteCouAssoc()
@@ -273,11 +275,12 @@
 
             //Act
             $test_activity->addCountry($test_country);
+            $test_activity2->addCountry($test_country);
             $test_activity2->delete();
             $result = $test_activity->getCountries();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_country], $result);
         }
 
         function test_DropAdventure()
@@ -302,7 +305,7 @@
             $result = $test_activity->getAdventures();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_adventure], $result);
         }
 
         function test_DropCountry()
@@ -327,7 +330,7 @@
             $result = $test_activity->getCountries();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_country], $result);
         }
 
 

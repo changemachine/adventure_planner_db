@@ -56,12 +56,12 @@
     // Adding associations and droping them without deleting the whole activity
         function addCountry($country)
         {
-            $GLOBALS['DB']->exec("INSERT INTO activites_countries (activity_id, country_id) VALUES ({$this->getId()}, {$country->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO activities_countries (activity_id, country_id) VALUES ({$this->getId()}, {$country->getId()});");
         }
 
         function addAdventure($adventure)
         {
-            $GLOBALS['DB']->exec("INSERT INTO activites_adventures (activity_id, country_id) VALUES ({$this->getId()}, {$adventure->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO activities_adventures (activity_id, adventure_id) VALUES ({$this->getId()}, {$adventure->getId()});");
         }
 
         function dropCountry($country)

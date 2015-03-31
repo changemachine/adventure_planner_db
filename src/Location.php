@@ -43,7 +43,7 @@
 
         function setLongitude($new_longitude)
         {
-            $this->longitude = (float) $new_longitude
+            $this->longitude = (float) $new_longitude;
         }
 
         function setActivity_id($new_id)
@@ -81,7 +81,7 @@
         function updateActivity_id($new_id)
         {
             $GLOBALS['DB']->exec("UPDATE locations SET location_id = {$new_id} WHERE id = {$this->getId()};");
-            $this->setActivity_id$new_id);
+            $this->setActivity_id($new_id);
         }
         // Make sure to delete associations in join tables as well
         function delete()
@@ -105,7 +105,7 @@
                 $longitude = $place['longitude'];
                 $id = $place['id'];
                 $activity_id = $place['activity_id'];
-                $latitude = $place['latitude']
+                $latitude = $place['latitude'];
                 $new_location = new Location($latitude, $longitude, $activity_id, $id);
                 array_push($returned_locations, $new_location);
             }
