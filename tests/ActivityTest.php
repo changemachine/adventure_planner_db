@@ -149,6 +149,188 @@
             $this->assertEquals([$test_activity], $result);
         }
 
+        function testAddAdventure()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            $adventure = "kitesurfing in hawaii";
+            $test_adventure = new Adventure($adventure);
+            $test_adventure->save();
+
+            //Act
+            $test_activity->addAdventure($test_adventure);
+            $result = $test_activity->getAdventures();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+        function test_addCountry()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            $Country = "USA";
+            $test_country = new Country($Country);
+            $test_country->save();
+
+            //Act
+            $test_activity->addCountry($test_country);
+            $result = $test_activity->getCountries();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+        function test_getAdventures()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+            $name2 = "sightseeing";
+            $test_activity2 = new Activity($name2);
+            $test_activity2->save();
+
+            $adventure = "kitesurfing in hawaii";
+            $test_adventure = new Adventure($adventure);
+            $test_adventure->save();
+
+            //Act
+            $test_activity->addAdventure($test_adventure);
+            $test_activity2->addAdventure($test_adventure);
+            $result = $test_activity->getAdventures();
+
+            //Assert
+            $this->assertEquals([$test_activity, $test_activity2], $result);
+        }
+
+        function test_getCountries()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            $name2 = "Canada";
+            $test_country2 = new Country($name2);
+            $test_country2->save();
+
+            $Country = "USA";
+            $test_country = new Country($Country);
+            $test_country->save();
+
+            //Act
+            $test_activity->addCountry($test_country);
+            $test_activity->addCountry($test_country2);
+            $result = $test_activity->getCountries();
+
+            //Assert
+            $this->assertEquals([$test_activity, $test_country2], $result);
+        }
+
+        function test_deleteAdvAssoc()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+            $name2 = "sightseeing";
+            $test_activity2 = new Activity($name2);
+            $test_activity2->save();
+
+            $adventure = "kitesurfing in hawaii";
+            $test_adventure = new Adventure($adventure);
+            $test_adventure->save();
+
+            //Act
+            $test_activity->addAdventure($test_adventure);
+            $test_activity2->delete();
+            $result = $test_activity->getAdventures();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+        function test_deleteCouAssoc()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+            $name2 = "sightseeing";
+            $test_activity2 = new Activity($name2);
+            $test_activity2->save();
+
+            $Country = "USA";
+            $test_country = new Country($Country);
+            $test_country->save();
+
+            //Act
+            $test_activity->addCountry($test_country);
+            $test_activity2->delete();
+            $result = $test_activity->getCountries();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+        function test_DropAdventure()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            $name2 = "sightseeing in the Congo";
+            $test_adventure2 = new Adventure($name2);
+            $test_adventure2->save();
+
+            $adventure = "kitesurfing in hawaii";
+            $test_adventure = new Adventure($adventure);
+            $test_adventure->save();
+
+            //Act
+            $test_activity->addAdventure($test_adventure);
+            $test_activity->addAdventure($test_adventure2);
+            $test_activity->dropAdventure($test_adventure2);
+            $result = $test_activity->getAdventures();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+        function test_DropCountry()
+        {
+            //Arrange
+            $name = "eating";
+            $test_activity = new Activity($name);
+            $test_activity->save();
+
+            $name2 = "Canada";
+            $test_country2 = new Country($name2);
+            $test_country2->save();
+
+            $Country = "USA";
+            $test_country = new Country($Country);
+            $test_country->save();
+
+            //Act
+            $test_activity->addCountry($test_country);
+            $test_activity->addCountry($test_country2);
+            $test_activity->dropCountry($test_country2);
+            $result = $test_activity->getCountries();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
+
 
 
     }

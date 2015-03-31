@@ -110,7 +110,7 @@
         function getCountries()
         {
             $query = $GLOBALS['DB']->query("SELECT countries.* FROM activities JOIN
-            activities_countries ON (acitivities_id = activities_countries.activity_id)
+            activities_countries ON (activities.id = activities_countries.activity_id)
             JOIN countries ON (countries.id = activities_countries.country_id)
             WHERE activities.id = {$this->getId()};");
 
@@ -129,7 +129,7 @@
         function getAdventures()
         {
             $query = $GLOBALS['DB']->query("SELECT adventures.* FROM activities JOIN
-            activities_adventures ON (acitivities_id = activities_adventures.activity_id)
+            activities_adventures ON (activities.id = activities_adventures.activity_id)
             JOIN adventures ON (adventures.id = activities_adventures.adventure_id)
             WHERE activities.id = {$this->getId()};");
 
