@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: activities; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE activities (
@@ -42,7 +42,7 @@ CREATE TABLE activities (
 ALTER TABLE activities OWNER TO "Guest";
 
 --
--- Name: activities_adventures; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities_adventures; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE activities_adventures (
@@ -76,7 +76,7 @@ ALTER SEQUENCE activities_adventures_id_seq OWNED BY activities_adventures.id;
 
 
 --
--- Name: activities_countries; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities_countries; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE activities_countries (
@@ -131,7 +131,7 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: adventures; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: adventures; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE adventures (
@@ -164,7 +164,7 @@ ALTER SEQUENCE adventures_id_seq OWNED BY adventures.id;
 
 
 --
--- Name: countries; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: countries; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE countries (
@@ -307,7 +307,7 @@ SELECT pg_catalog.setval('countries_id_seq', 1, false);
 
 
 --
--- Name: activities_adventures_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities_adventures_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY activities_adventures
@@ -315,7 +315,7 @@ ALTER TABLE ONLY activities_adventures
 
 
 --
--- Name: activities_countries_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities_countries_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY activities_countries
@@ -323,7 +323,7 @@ ALTER TABLE ONLY activities_countries
 
 
 --
--- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY activities
@@ -331,7 +331,7 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: adventures_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: adventures_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY adventures
@@ -339,7 +339,7 @@ ALTER TABLE ONLY adventures
 
 
 --
--- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY countries
@@ -359,4 +359,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-

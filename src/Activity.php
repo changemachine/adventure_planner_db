@@ -109,12 +109,39 @@
     // Methods for getting all countries and adventures which include this activity
         function getCountries()
         {
-            
+            $query = $GLOBALS['DB']->query("SELECT countries.* FROM activities JOIN
+            activities_countries ON (acitivities_id = activities_countries.activity_id)
+            JOIN countries ON (countries.id = activities_countries.country_id)
+            WHERE activities.id = {$this->getId()};");
+
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $matching_countries = array();
+            foreach($result as $country){
+                $name = $country['name'];
+                $id = $country['id'];
+                $new_country = new Country($name, $id);
+                array_push($matching_countries, $new_country);
+            }
+            return $matching_countries;
+
         }
 
         function getAdventures()
         {
+            $query = $GLOBALS['DB']->query("SELECT adventures.* FROM activities JOIN
+            activities_adventures ON (acitivities_id = activities_adventures.activity_id)
+            JOIN adventures ON (adventures.id = activities_adventures.adventure_id)
+            WHERE activities.id = {$this->getId()};");
 
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $matching_adventures = array();
+            foreach($result as $exploit){
+                $name = $exploit['name'];
+                $id = $exploit['id'];
+                $new_adventure = new Adventure($name, $id);
+                array_push($matching_adventures, $new_adventure);
+            }
+            return $matching_adventures;
         }
 
 

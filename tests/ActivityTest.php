@@ -6,6 +6,8 @@
     */
 
     require_once "src/Activity.php";
+    require_once "src/Country.php";
+    require_once "src/Adventure.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=travel_test');
 
@@ -14,6 +16,8 @@
         protected function tearDown()
         {
             Activity::deleteAll();
+            Adventure::deleteAll();
+            Country::deleteAll();
         }
 
         function test_setId()

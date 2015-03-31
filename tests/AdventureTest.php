@@ -109,7 +109,7 @@
 
         function test_search()
         {
-            $name= "I"
+            $name= "I";
         }
     }
 
