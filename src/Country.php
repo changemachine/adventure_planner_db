@@ -3,7 +3,10 @@
         private $name;
         private $id;
 
-        function __construct($name, $id = null){
+
+        function __construct($name, $id = null)
+        {
+
             $this->name = $name;
             //language
             //geographic area
