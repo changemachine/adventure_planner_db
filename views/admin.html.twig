@@ -2,11 +2,67 @@
 <html>
     <head>
         <title>Princess Adventures</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
-            
+            <div class="adventures">
+                {% if adventures is not empty %}
+                    <h3>These are the Adventures</h3>
+                    <ul>
+                        {% for event in adventures %}
+                            <li>{{ event.getName }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <h3>There are no Adventures</h3>
+                {% endif %}
+                <form  action="/add_adventure" method="post">
+                    <label for="Adventure">Add Adventure Name:</label>
+                    <input type="text" name="name">
+                    <label for="description">Add Adventure Description:</label>
+                    <input type="text" name="description">
+                    <button class="btn btn-danger" type="submit">Create Adventure</button>
+                </form>
+            </div>
+            <div class="activities">
+                {% if activities is not empty %}
+                    <h3>These are the Activities</h3>
+                    <ul>
+                        {% for action in activities %}
+                            <li>{{ action.getName }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <h3>There are no Activities</h3>
+                {% endif %}
+                <form  action="/add_activity" method="post">
+                    <label for="Activity">Add Activity Name:</label>
+                    <input type="text" name="name">
+                    <button class="btn btn-danger" type="submit">Create Activity</button>
+                </form>
 
+            </div>
+            <div class="countries">
+                {% if countries is not empty %}
+                    <h3>These are the Countries</h3>
+                    <ul>
+                        {% for place in countries %}
+                            <li>{{ place.getName }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <h3>There are no Countries</h3>
+                {% endif %}
+                <form  action="/add_country" method="post">
+                    <label for="Country">Add Country Name:</label>
+                    <input type="text" name="name">
+                    <button class="btn btn-danger" type="submit">Create Country</button>
+                </form>
+            </div>
+            <form action="/delete" method="post">
+                <button type="submit" class="btn btn-danger">Destroy Everything</button>
+            </form>
 
         </div>
     </body>

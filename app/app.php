@@ -23,9 +23,43 @@
 
 // Routes for Admin
     $app->get("/admin", function() use($app){
-        return $app['twig']->render('admin.html.twig');
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
     });
 
+// Routes to add content
+    $app->post("/add_country", function() use($app){
+        $country = new Country($_POST['name']);
+        $country->save();
+
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+    $app->post("/add_adventure", function() use($app){
+        $adventure = new Adventure($_POST['name'], $id = null, $_POST['description']);
+        $adventure->save();
+
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+    $app->post("/add_activity", function() use($app){
+        $activity = new Activity($_POST['name']);
+        $activity->save();
+
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+// Route to delete everything
+    $app->post("/delete", function() use($app){
+        Country::deleteAll();
+        Adventure::deleteAll();
+        Activity::deleteAll();
+
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+
+
+////////////////////////////
 // Routes for User
 
     $app->get("/", function() use($app){
