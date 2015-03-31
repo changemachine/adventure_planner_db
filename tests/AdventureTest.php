@@ -109,7 +109,20 @@
 
         function test_search()
         {
-            $name= "I"
+            $name= "Ironman";
+            $test_adventure = new Adventure($name);
+            $test_adventure->save();
+
+            $name1 = "Marathon";
+            $test_adventure1 = new Adventure($name1);
+            $test_adventure1->save();
+
+            $search_id = $test_adventure1->getId();
+            $result = Adventure::find($search_id);
+
+            $this->assertEquals($test_adventure1, $result);
+
+
         }
     }
 
