@@ -58,6 +58,16 @@
             $GLOBALS['DB']->exec("INSERT INTO activities_adventures (activity_id, adventure_id) VALUES ({$new_activity->getId()}, {$this->getId()});");
         }
 
+        function dropActivity($drop_activity)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM activities_adventures WHERE adventure_id = {$this->getId()} AND activity_id = {$drop_activity->getId()};");
+        }
+
+        function dropCountry($drop_country)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM adventures_countries WHERE adventure_id = {$this->getId()} AND country_id = {$drop_country->getId()};");
+        }
+
         function getActivities()
         {
             $query = $GLOBALS['DB']->query("SELECT activities.* FROM adventures JOIN activities_adventures ON (adventures.id = activities_adventures.adventure_id) JOIN activities ON (activities.id = activities_adventures.activity_id) WHERE adventures.id = {$this->getId()};");
@@ -79,6 +89,7 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO adventures_countries (adventure_id, country_id) VALUES ({$this->getId()}, {$new_country->getId()});");
         }
+
 
         function getCountries()
         {
@@ -118,7 +129,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM adventures *;");
-            
+
         }
 
         static function find($search_id)

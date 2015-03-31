@@ -228,6 +228,42 @@
             $this->assertEquals([$test_country, $test_country1], $result);
 
         }
+
+        function test_dropActivity()
+        {
+            $test_adventure = new Adventure("Ironman");
+            $test_adventure->save();
+            $test_activity = new Activity("Run");
+            $test_activity->save();
+            $test_activity1 = new Activity("Swim");
+            $test_activity1->save();
+
+            $test_adventure->addActivity($test_activity);
+            $test_adventure->addActivity($test_activity1);
+
+            $test_adventure->dropActivity($test_activity);
+            $result = $test_adventure->getActivities();
+
+            $this->assertEquals([$test_activity1], $result);
+        }
+
+        function test_dropCountry()
+        {
+            $test_adventure = new Adventure("Ironman");
+            $test_adventure->save();
+            $test_country = new Country("America");
+            $test_country->save();
+            $test_country1 = new Country("Brazil");
+            $test_country1->save();
+
+            $test_adventure->addCountry($test_country);
+            $test_adventure->addCountry($test_country1);
+
+            $test_adventure->dropCountry($test_country);
+            $result = $test_adventure->getCountries();
+
+            $this->assertEquals([$test_country1], $result);
+        }
     }
 
 
