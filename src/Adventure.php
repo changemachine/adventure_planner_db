@@ -44,6 +44,61 @@
             $GLOBALS['DB']->exec("UPDATE adventures SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
+
+        function singleDelete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM adventures WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM activities_adventures WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM activities_countries WHERE id = {$this->getId()};");
+        }
+
+
+        function addActivity($new_activity)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO activities_adventures (activity_id, adventure_id) VALUES ({$new_activity->getId()}, {$this->getId()});");
+        }
+
+        function getActivities()
+        {
+            $query = $GLOBALS['DB']->query("SELECT activities.* FROM adventures JOIN activities_adventures ON (adventures.id = activities_adventures.adventure_id) JOIN activities ON (activities.id = activities_adventures.activity_id) WHERE adventures.id = {$this->getId()};");
+
+            $query_fetched = $query->fetchAll(PDO::FETCH_ASSOC);
+            $return_activities = array ();
+
+            foreach ($query_fetched as $element)
+            {
+                $new_name = $element['name'];
+                $new_id = $element['id'];
+                $new_activity = new Activity($new_name, $new_id);
+                array_push($return_activities, $new_activity);
+            }
+            return $return_activities;
+        }
+
+        function addCountry($new_country)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO adventures_countries (adventure_id, country_id) VALUES ({$this->getId()}, {$new_country->getId()});");
+        }
+
+        function getCountries()
+        {
+            $query = $GLOBALS['DB']->query("SELECT countries.* FROM adventures JOIN adventures_countries ON (adventures.id = adventures_countries.adventure_id) JOIN countries ON (countries.id = adventures_countries.country_id) WHERE adventures.id = {$this->getId()};");
+            $query_fetched = $query->fetchAll(PDO::FETCH_ASSOC);
+            $return_countries = array();
+
+            foreach ($query_fetched as $element)
+            {
+                $new_name = $element['name'];
+                $new_id = $element['id'];
+                $new_country = new Country($new_name, $new_id);
+                array_push ($return_countries, $new_country);
+            }
+            return $return_countries;
+
+        }
+
+
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM adventures");
@@ -63,6 +118,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM adventures *;");
+            
         }
 
         static function find($search_id)
