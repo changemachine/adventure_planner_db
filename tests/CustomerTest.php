@@ -12,6 +12,7 @@
         {
             Customer::deleteAll();
         }
+        
         function test_SetName()
         {
             //Arrange
