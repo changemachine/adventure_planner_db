@@ -1,14 +1,15 @@
 <?php
     class Country {
         private $name;
+        //lang
+        //region (south pacific)
         private $id;
 
         function __construct($name, $id){
             $this->name = $name;
-            //language
-            //geographic area
             $this->id = $id;
         }
+
     //SET GET PROPS
         function setName($new_name){
             $this->name = (string) $new_name;
@@ -22,6 +23,7 @@
         function getId(){
             return $this->id;
         }
+
     //SAVE GET-ALL, DELETE-ALL
         function save(){
             $statement = $GLOBALS['DB']->query("INSERT INTO countries (name) VALUES ('{$this->getName()}') RETURNING id;");
@@ -42,6 +44,7 @@
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM countries *;");
         }
+
     // √ FIND, UPDATE & DELETE STORE
         static function find($search_id){
             $found_country = null;
@@ -60,16 +63,17 @@
         }
         function deleteCountry(){ //?
             $GLOBALS['DB']->exec("DELETE FROM countries WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM countries_activities WHERE country_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM activities_countries WHERE country_id = {$this->getId()};");
         }
+
     // JOIN
         function addCountryActivity($activity){
-            $GLOBALS['DB']->exec("INSERT INTO countries_activities (country_id, activity_id) VALUES ({$this->getId()}, {$activity->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO activities_countries (country_id, activity_id) VALUES ({$this->getId()}, {$activity->getId()});");
         }
         function getCountryActivities(){
             $query = $GLOBALS['DB']->query("SELECT activities.* FROM countries
-                JOIN countries_activities ON (countries.id = countries_activities.country_id)
-                JOIN activities ON (countries_activities.activity_id = activities.id)
+                JOIN activities_countries ON (countries.id = activities_countries.country_id)
+                JOIN activities ON (activities_countries.activity_id = activities.id)
                 WHERE countries.id = {$this->getId()};");
             $returned_activities = $query->fetchAll(PDO::FETCH_ASSOC);
             $activities = array();
@@ -81,5 +85,9 @@
             }
             return $activities;
         }
+
+
+
+
     }
 ?>
