@@ -122,7 +122,34 @@
 
             $this->assertEquals($test_adventure1, $result);
 
+        }
 
+        function test_update()
+        {
+            $name = "Ironman";
+            $test_adventure = new Adventure($name);
+            $new_name = "Marathon";
+
+            $test_adventure->update($new_name);
+            $result = $test_adventure->getName();
+
+            $this->assertEquals("Marathon", $result);
+        }
+
+        function test_UpdateDatabase()
+        {
+            $name = "Ironman";
+            $test_adventure = new Adventure($name);
+            $new_name = "Marathon";
+
+            $test_adventure->save();
+            $test_adventure->update($new_name);
+            $result = Adventure::getAll();
+            var_dump($result);
+
+
+
+            $this->assertEquals("Marathon", $result[0]->getName());
         }
     }
 
