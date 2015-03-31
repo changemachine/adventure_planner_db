@@ -4,11 +4,15 @@
     {
         private $name;
         private $id;
+        private $description;
+        private $feedback_id;
 
-        function __construct($name, $id = null)
+        function __construct($name, $id = null, $description = "", $feedback_id = 1)
         {
             $this->name = $name;
             $this->id = $id;
+            $this->description = $description;
+            $this->feedback_id = $feedback_id;
         }
 
         function getName()
@@ -31,9 +35,29 @@
             $this->id = $new_id;
         }
 
+        function getDescription()
+        {
+            return $this->description;
+        }
+
+        function setDescription($new_description)
+        {
+            $this->description = (string) $new_description;
+        }
+
+        function getFeedback_id()
+        {
+            return $this->feedback_id;
+        }
+
+        function setFeedback_id($new_id)
+        {
+            $this->feedback_id = (int) $new_id;
+        }
+
         function save()
         {
-            $query = $GLOBALS['DB']->query("INSERT INTO adventures (name) VALUES ('{$this->getName()}') RETURNING id;");
+            $query = $GLOBALS['DB']->query("INSERT INTO adventures (name, description, feedback_id) VALUES ('{$this->getName()}', '{$this->getDescription()}', {$this->getFeedback_id()}) RETURNING id;");
             $query_fetched = $query->fetch(PDO::FETCH_ASSOC);
             $this->setId($query_fetched['id']);
 
@@ -107,8 +131,6 @@
             return $return_countries;
 
         }
-
-
 
         static function getAll()
         {

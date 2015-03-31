@@ -18,10 +18,21 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodparameterOverride();
 
-    $app->get("/", function(){
-        return "Hello World";
+// Routes for Admin
+    $app->get("/admin", function() use($app){
+        return $app['twig']->render('admin.html.twig');
     });
-    
+
+// Routes for User
+
+    $app->get("/", function() use($app){
+        return $app['twig']->render('home.html.twig');
+    });
+
+    $app->get("/profile", function() use($app){
+        return $app['twig']->render('profile.html.twig');
+    });
+
     return $app;
 
  ?>
