@@ -1,11 +1,9 @@
 <?php
     class Country {
         private $name;
-        //lang
-        //region (south pacific)
         private $id;
 
-        function __construct($name, $id){
+        function __construct($name, $id = null){
             $this->name = $name;
             $this->id = $id;
         }
@@ -30,6 +28,7 @@
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
+
         static function getAll(){
             $returned_countries = $GLOBALS['DB']->query("SELECT * FROM countries;");
             $countries = array();

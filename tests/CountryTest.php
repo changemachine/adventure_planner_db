@@ -4,7 +4,7 @@
     * $backupStaticAttribute disabled
     */
 
-    // $DB = new PDO(pgsql:host=localhost;dbname=------travel???);
+    $DB = new PDO('pgsql:host=localhost;dbname=travel_test');
 
     require_once "src/Country.php";
 
@@ -90,7 +90,7 @@
         $result = Country::find($id2);
 
         //Assert
-        $this->assertEquals([2, $result);
+        $this->assertEquals(2, $result);
     }
 
     function test_update(){
