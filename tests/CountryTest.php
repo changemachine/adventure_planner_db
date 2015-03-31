@@ -8,7 +8,8 @@
 
     require_once "src/Country.php";
 
-    class CountryTest extends PHPUnit_Framework_TestCase{
+    class CountryTest extends PHPUnit_Framework_TestCase
+    {
 
 //tearDown()
     protected function tearDown(){
@@ -17,92 +18,102 @@
 
 //Set-n-Get Props, save
 
-    function test_setGetSave(){
+    function test_save(){
         //Arrange
-        $name = "eritrea";
-        $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
-
+        $name = "Constantinople";
+        $id = 2;
+        $test_country = new Country($name, $id);
+        $test_country->save();
         //Act
-        $eritrea->setName('Eritrea');
-        $eritrea->setId(2);
-        $result = $eritrea->getName();
-        $id2 = $eritrea->getId();
-
+        $result = Country::getAll();
         //Assert
-        $this->assertEquals(['Eritrea', $id2], [$result, 2]);
+        $this->assertEquals([$test_country], $result);
+    }
+    function test_setGetName(){
+        //Arrange
+        $name = "Constantinople";
+        $test_country = new Country($name);
+        //Act
+        $test_country->setName('Istanbul');
+        $result = $test_country->getName();
+        //Assert
+        $this->assertEquals('Istanbul', $result);
+    }
+    function test_setGetId(){
+        //Arrange
+        $name = "Constantinople";
+        $id = 1;
+        $test_country = new Country($name, $id);
+        //Act
+        $test_country->setId(2);
+        $result = $test_country->getId();
+        //Assert
+        $this->assertEquals(2, $result);
     }
 
 //The Static Twins: GetAll, DeleteAll
     function test_getAll(){
         //Arrange
-        $name = "eritrea";
-        $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
+        $name = "test_country1";
+        $test_country = new Country($name);
+        $test_country->save();
 
-        $name2 = "Colorado";
-        $id2 = 2;
-        $colorado = new Country($name2, $id2);
-        $colorado->save();
+        $name2 = "test_country2";
+        $test_country2 = new Country($name2);
+        $test_country2->save();
         //Act
         $result = Country::getAll();
         //Assert
-        $this->assertEquals([$eritrea, $colorado], $result);
+        $this->assertEquals([$test_country, $test_country2], $result);
     }
 
     function test_deleteAll() {
 
         //Arrange
-        $name = "eritrea";
-        $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
+        $name = "test_country1";
+        $test_country1 = new Country($name);
+        $test_country1->save();
 
-        $name2 = "Colorado";
-        $id2 = 2;
-        $colorado = new Country($name2, $id2);
-        $colorado->save();
+        $name2 = "test_country2";
+        $test_country2 = new Country($name2);
+        $test_country2->save();
 
         //Act
         $result = Country::getAll();
 
         //Assert
-        $this->assertEquals([$eritrea, $colorado], $result);
+        $this->assertEquals([$test_country1, $test_country2], $result);
     }
 
 //Find, Update & Delete Each
 
     function test_find(){
         //Arrange
-        $name = "eritrea";
-        $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
+        $name = "test_country1";
+        $test_country1 = new Country($name);
+        $test_country1->save();
 
-        $name2 = "Colorado";
-        $id2 = 2;
-        $colorado = new Country($name2, $id2);
-        $colorado->save();
+        $name2 = "test_country2";
+        $test_country2 = new Country($name2);
+        $test_country2->save();
 
         //Act
-        $result = Country::find($id2);
+        $result = Country::find($test_country1->getId());
 
         //Assert
-        $this->assertEquals(2, $result);
+        $this->assertEquals($test_country1, $result);
     }
 
     function test_update(){
         //Arrange
         $name = "Czechoslovakia";
         $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
+        $test_country = new Country($name, $id);
+        $test_country->save();
 
         //Act
-        $eritrea->update('Czech Republic');
-        $result = $name->getName();
+        $test_country->update('Czech Republic');
+        $result = $test_country->getName();
 
         //Assert
         $this->assertEquals('Czech Republic', $result);
@@ -110,22 +121,22 @@
 
     function test_delete(){
         //Arrange
-        $name = "eritrea";
+        $name = "USSR";
         $id = 1;
-        $eritrea = new Country($name, $id);
-        $eritrea->save();
+        $test_country1 = new Country($name, $id);
+        $test_country1->save();
 
-        $name2 = "Colorado";
+        $name2 = "Poland";
         $id2 = 2;
-        $colorado = new Country($name2, $id2);
-        $colorado->save();
+        $test_country2 = new Country($name2, $id2);
+        $test_country2->save();
 
         //Act
-        $colorado->delete();
+        $test_country1->deleteCountry();
         $result = Country::getAll();
 
         //Assert
-        $this->assertEquals($eritrea, $result);
+        $this->assertEquals([$test_country2], $result);
     }
 
 

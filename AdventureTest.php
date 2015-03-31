@@ -264,7 +264,10 @@
             $result = $test_adventure->getCountries();
 
             $this->assertEquals([$test_country1], $result);
+<<<<<<< HEAD:tests/AdventureTest.php
 
+=======
+>>>>>>> eb22db17256a42531fd6c10e0419502ddbac998c:AdventureTest.php
         }
     }
 
