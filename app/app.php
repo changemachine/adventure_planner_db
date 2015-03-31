@@ -5,6 +5,8 @@
     require_once __DIR__."/../src/Location.php";
     require_once __DIR__."/../src/Country.php";
     require_once __DIR__."/../src/Adventure.php";
+    require_once __DIR__."/../src/Customer.php";
+
 
 
     $app = new Silex\Application();
