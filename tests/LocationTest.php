@@ -175,18 +175,16 @@
             $test_location = new Location($lat, $long, $activity_id, $id);
             $test_location->save();
 
-            $lat2 = 1.4;
-            $long2 = 4.1;
-            $activity_id2 = 2;
-            $id2 = 3;
-            $test_location2 = new Location($lat2, $long2, $activity_id2, $id2);
-            $test_location2->save();
+            $test_activity = new Activity("Swimming");
+            $test_activity->save();
             //Act
-            Location::deleteAll();
-            $result = Location::getAll();
+            $test_location->addActivity($test_activity);
+
+            $result = $test_activity->getId();
+
 
             //Assert
-            $this->assertEquals([], $result);
+            $this->assertEquals($test_location->getActivity_id(), $result);
         }
 
         // function test_find()

@@ -144,8 +144,8 @@
         }
 
         function addActivity($activity){
-            $result = $GLOBALS['DB']->query("SELECT id FROM activities WHERE name = {$activity_name->getName()};");
-            $found = $result->fetch(PDO::FETCH_ASSOC);
+            $activity_id = $GLOBALS['DB']->query("SELECT id FROM activities WHERE name = '{$activity->getName()}';");
+            $found = $activity_id->fetch(PDO::FETCH_ASSOC);
             $found_id = $found['id'];
             $GLOBALS['DB']->exec("UPDATE locations SET activity_id = {$found_id} WHERE id = {$this->getId()};");
             $this->setActivity_id($found_id);
