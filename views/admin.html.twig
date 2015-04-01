@@ -11,7 +11,7 @@
                     <h3>These are the Adventures</h3>
                     <ul>
                         {% for event in adventures %}
-                            <li>{{ event.getName }}</li>
+                            <li>{{ event.getName }}<a href="/edit_adventure/{{ event.getId }}"><button type="sumbit">Edit Adventure</button></a></li>
                         {% endfor %}
                     </ul>
                     {% else %}

@@ -57,6 +57,31 @@
         return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
     });
 
+// Other CRUD routes
+
+    $app->get("/edit_adventure/{id}", function($id) use($app){
+        $adventure = Adventure::find($id);
+
+        return $app['twig']->render('edit_adventure.html.twig', array('adventure' => $adventure, 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+    $app->post("/adventure_add_activity", function() use($app){
+        $adventure = Adventure::find($_POST['adventure_id']);
+        $activity = Activity::find($_POST['activity_id']);
+        $adventure->addActivity($activity);
+
+        return $app['twig']->render('edit_adventure.html.twig', array('adventure' => $adventure, 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
+
+    $app->post("/adventure_drop_activity", function() use($app){
+        $adventure = Adventure::find($_POST['adventure_id']);
+        $activity = Activity::find($_POST['activity_id']);
+        $adventure->dropActivity($activity);
+
+        return $app['twig']->render('edit_adventure.html.twig', array('adventure' => $adventure, 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
+
 
 
 ////////////////////////////
