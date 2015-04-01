@@ -170,6 +170,30 @@
 
         }
 
+        function getLocations()
+        {
+            $query = $GLOBALS['DB']->query("SELECT * FROM locations WHERE adventure_id = {$this->getId()};");
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $locations = array();
+            foreach($result as $adventure){
+                $latitude = floatval($adventure['latitude']);
+                $longitude = floatval($adventure['longitude']);
+                $activity_id = $adventure['activity_id'];
+                $id = $adventure['id'];
+                $adventure_id = $adventure['adventure_id'];
+                $new_location = new location($latitude, $longitude, $activity_id, $id, $adventure_id);
+                array_push($locations, $new_location);
+            }
+            return $locations;
+        }
+
+        function addLocation($location)
+        {
+            $GLOBALS['DB']->exec("UPDATE locations SET adventure_id = {$this->getId()} WHERE id = {$location->getId()};");
+            $location->setAdventure_id($this->getId());
+        }
+
 
 
 

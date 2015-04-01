@@ -7,42 +7,57 @@
     <body>
         <div class="container">
             <h3>Your adventure is {{ adventure.getName }}</h3>
+            <p>
+                <em>Description:</em> {{ adventure.getDescription }}
+            </p>
                 {% if activities is not empty %}
-                <h4>Your Activities are:</h4>
-                    {% for action in activities %}
 
+                    <h4>Your Activities are:</h4>
                         <ol>
-                            {% for event in action.getAdventures %}
-                                <li>{{ event.getName }}</li>
-                            {% endfor %}
+                        {% for action in adventure.getActivities %}
+                            <li>
+                                {{ action.getName }}
+                                <ol>
+                                    <form action="/location" method="post">
+                                        <input type="hidden" name="adventure_id" value=" {{ adventure.getId }}">
+                                        <label for="Long">Enter Activity Longitude</label>
+                                        <input type="number" step="any" name="longitude">
+                                    </form>
+                                </ol>
+                            </li>
+                        {% endfor %}
                         </ol>
-                    {% endfor %}
 
-                        {% else %}
-                        <h4>There are not action in this adventure</h4>
+                        <form action="/adventure_add_activity" method="post">
+                            <input type="hidden" name="adventure_id" value=" {{ adventure.getId }}">
+                            <label for="activity_name">Add an Activity</label>
+                            <select name="activity_id" type="text">
+
+                                {% for event in activities %}
+                                    <option value="{{ event.getId }}">{{ event.getName }}</option>
+                                {% endfor %}
+
+                            </select>
+                            <button type='submit' class="btn">Add Activity to Adventure</button>
+                        </form>
+                        <form action="/adventure_drop_activity" method="post">
+                            <input type="hidden" name="adventure_id" value=" {{ adventure.getId }}">
+                            <label for="activity_name">Drop an Adventure</label>
+                            <select name="activity_id" type="text">
+
+                                {% for event in adventure.getActivities %}
+                                    <option value="{{ event.getId }}" required>{{ event.getName }}</option>
+                                {% endfor %}
+
+                            </select>
+                            <button type='submit' class="btn">Drop Activity from Adventure</button>
+                        </form>
+
+                    {% else %}
+                        <h4>There are no actions in this adventure</h4>
                 {% endif%}
-                {% for action in activities %}
-                    <form action="/adventure_add_activity" method="post">
-                        <input type="hidden" name="adventure_id" value=" {{ adventure.getId }}">
-                        <label for="activity_name">Add an Activity</label>
-                        <select name="activity_id" type="text">
-                            {% for event in action %}
-                                <option value="{{ event.getId }}">{{ event.getName }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type='submit' class="btn">Add Activity to Adventure</button>
-                    </form>
-                    <form action="/adventure_drop_activity" method="post">
-                        <input type="hidden" name="adventure_id" value=" {{ adventure.getId }}">
-                        <label for="activity_name">Drop an Adventure</label>
-                        <select name="activity_id" type="text">
-                            {% for event in action.getAdventures %}
-                                <option value="{{ event.getId }}" required>{{ event.getName }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type='submit' class="btn">Drop Activity from Adventure</button>
-                    </form>
-                {% endfor %}
+
+
 
                 <a href="/admin"><button class="btn" type="submit">Back to Home</button></a>
         </div>

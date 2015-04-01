@@ -86,7 +86,7 @@
             $test_adventure = new Adventure($name);
             $test_adventure->save();
 
-            $name1 = "Marathon";
+            $name1 = "Ultra";
             $test_adventure1 = new Adventure($name1);
             $test_adventure1->save();
 
@@ -101,7 +101,7 @@
             $test_adventure = new Adventure($name);
             $test_adventure->save();
 
-            $name1 = "Marathon";
+            $name1 = "Mega";
             $test_adventure1 = new Adventure($name1);
             $test_adventure->save();
 
@@ -118,7 +118,7 @@
             $test_adventure = new Adventure($name);
             $test_adventure->save();
 
-            $name1 = "Marathon";
+            $name1 = "Kowa";
             $test_adventure1 = new Adventure($name1);
             $test_adventure1->save();
 
@@ -133,25 +133,26 @@
         {
             $name = "Ironman";
             $test_adventure = new Adventure($name);
-            $new_name = "Marathon";
+            $test_adventure->save();
+            $new_name = "Peak";
 
             $test_adventure->update($new_name);
             $result = $test_adventure->getName();
 
-            $this->assertEquals("Marathon", $result);
+            $this->assertEquals("Peak", $result);
         }
 
         function test_UpdateDatabase()
         {
             $name = "Ironman";
             $test_adventure = new Adventure($name);
-            $new_name = "Marathon";
+            $new_name = "Bingo";
 
             $test_adventure->save();
             $test_adventure->update($new_name);
             $result = Adventure::getAll();
 
-            $this->assertEquals("Marathon", $result[0]->getName());
+            $this->assertEquals("Bingo", $result[0]->getName());
         }
 
         function test_singleDelete()
@@ -159,7 +160,7 @@
             $test_adventure = new Adventure("Ironman");
             $test_adventure->save();
 
-            $test_adventure1 = new Adventure("Marathon");
+            $test_adventure1 = new Adventure("Zap");
             $test_adventure1->save();
 
             $test_adventure->singleDelete();
@@ -263,10 +264,28 @@
             $result = $test_adventure->getCountries();
 
             $this->assertEquals([$test_country1], $result);
-<<<<<<< HEAD:tests/AdventureTest.php
 
-=======
->>>>>>> eb22db17256a42531fd6c10e0419502ddbac998c:AdventureTest.php
+        }
+
+        function test_addLocation()
+        {
+
+        }
+        function test_getLocations()
+        {
+            $test_adventure = new Adventure("Ironman");
+            $test_adventure->save();
+
+            $test_location = new Location(111.0, 333.0, 2, 34, 54);
+            $test_location->save();
+            $test_location2 = new Location(33.0, 442.0, 5, 234 ,5);
+            $test_location2->save();
+
+            $test_adventure->addLocation($test_location);
+            $test_adventure->addLocation($test_location2);
+            $result = $test_adventure->getLocations();
+
+            $this->assertEquals([$test_location, $test_location2], $result);
         }
     }
 
