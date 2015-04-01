@@ -312,7 +312,8 @@ CREATE TABLE levels (
     id integer NOT NULL,
     adventure_id integer,
     activity_lvl integer,
-    activity_id integer
+    activity_id integer,
+    activity_name character varying
 );
 
 
@@ -384,7 +385,8 @@ CREATE TABLE preferences (
     id integer NOT NULL,
     customer_id integer,
     activity_pref integer,
-    activity_id integer
+    activity_id integer,
+    activity_name character varying
 );
 
 
@@ -1020,6 +1022,16 @@ COPY activities_adventures (id, activity_id, adventure_id, required) FROM stdin;
 619	1724	1274	\N
 620	1725	1274	\N
 622	1727	1277	\N
+623	1739	1280	\N
+624	1741	1282	\N
+625	1741	1281	\N
+626	1743	1283	\N
+627	1744	1283	\N
+628	1747	1285	\N
+630	1749	1297	\N
+631	1750	1298	\N
+632	1751	1298	\N
+634	1753	1301	\N
 \.
 
 
@@ -1027,7 +1039,7 @@ COPY activities_adventures (id, activity_id, adventure_id, required) FROM stdin;
 -- Name: activities_adventures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('activities_adventures_id_seq', 622, true);
+SELECT pg_catalog.setval('activities_adventures_id_seq', 634, true);
 
 
 --
@@ -1377,6 +1389,12 @@ COPY activities_countries (id, activity_id, country_id) FROM stdin;
 397	1719	952
 398	1720	952
 399	1722	954
+401	1740	970
+402	1742	972
+403	1742	971
+404	1745	973
+405	1746	973
+406	1748	975
 \.
 
 
@@ -1384,14 +1402,14 @@ COPY activities_countries (id, activity_id, country_id) FROM stdin;
 -- Name: activities_countries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('activities_countries_id_seq', 400, true);
+SELECT pg_catalog.setval('activities_countries_id_seq', 407, true);
 
 
 --
 -- Name: activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('activities_id_seq', 1728, true);
+SELECT pg_catalog.setval('activities_id_seq', 1754, true);
 
 
 --
@@ -1583,6 +1601,10 @@ COPY adventures_countries (id, adventure_id, country_id) FROM stdin;
 217	1276	956
 218	1276	957
 220	1278	959
+221	1299	976
+222	1300	977
+223	1300	978
+225	1302	980
 \.
 
 
@@ -1590,14 +1612,14 @@ COPY adventures_countries (id, adventure_id, country_id) FROM stdin;
 -- Name: adventures_countries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('adventures_countries_id_seq', 220, true);
+SELECT pg_catalog.setval('adventures_countries_id_seq', 225, true);
 
 
 --
 -- Name: adventures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('adventures_id_seq', 1279, true);
+SELECT pg_catalog.setval('adventures_id_seq', 1303, true);
 
 
 --
@@ -1612,7 +1634,7 @@ COPY countries (id, name) FROM stdin;
 -- Name: countries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('countries_id_seq', 969, true);
+SELECT pg_catalog.setval('countries_id_seq', 990, true);
 
 
 --
@@ -1627,7 +1649,7 @@ COPY customers (id, name, password) FROM stdin;
 -- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('customers_id_seq', 288, true);
+SELECT pg_catalog.setval('customers_id_seq', 296, true);
 
 
 --
@@ -1649,7 +1671,7 @@ SELECT pg_catalog.setval('feedback_id_seq', 1, false);
 -- Data for Name: levels; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY levels (id, adventure_id, activity_lvl, activity_id) FROM stdin;
+COPY levels (id, adventure_id, activity_lvl, activity_id, activity_name) FROM stdin;
 \.
 
 
@@ -1672,14 +1694,14 @@ COPY locations (id, latitude, longitude, cost, activity_id, adventure_id) FROM s
 -- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('locations_id_seq', 372, true);
+SELECT pg_catalog.setval('locations_id_seq', 380, true);
 
 
 --
 -- Data for Name: preferences; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY preferences (id, customer_id, activity_pref, activity_id) FROM stdin;
+COPY preferences (id, customer_id, activity_pref, activity_id, activity_name) FROM stdin;
 \.
 
 
