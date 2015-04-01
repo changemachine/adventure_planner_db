@@ -12,7 +12,7 @@
         {
             Customer::deleteAll();
         }
-        
+
         function test_SetName()
         {
             //Arrange
@@ -128,6 +128,27 @@
             $result = Customer::getAll();
             //Assert
             $this->assertEquals([$test_patron], $result);
+        }
+
+        function test_rank(){
+            $hike_pref = 4;
+            $hike_level = 6;
+            $run_pref = 0;
+            $run_level = 4;
+            $culture_pref = 9;
+            $culture_level = 3;
+            $eat_pref = 9;
+            $eat_level = 6;
+            $swim_pref = 7;
+            $swim_level = 3;
+            $sail_pref = 3;
+            $sail_level = 0;
+            $hike_pref = 8;
+            $hike_level = 1;
+
+            $pref = new Preference($hike_pref, $run_pref, $culture_pref, $eat_pref, $swim_pref, $sail_pref, $hike_pref);
+
+
         }
 
     }
