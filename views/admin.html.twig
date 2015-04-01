@@ -14,10 +14,24 @@
                             <li>{{ event.getName }}
                                 <a href="/edit_adventure/{{ event.getId }}"><button type="sumbit">Edit Adventure</button></a>
                                 <ul>
-                                    {% for action in event.getActivities %}
-                                        <li>{{ action.getName }}</li>
+
+
+                                    {% for activity in event.getActivities %}
+                                        <li>{{ activity.getName }}</li>
+
+
+                                        <ul>
+                                            {% for place in event.getLocations if place.getActivity_id == activity.getId %}
+                                                <li>Latitude: {{ place.getLatitude }}</li>
+                                                <li>Longitude: {{ place.getLongitude }}</li>
+                                            {% endfor %}
+                                        </ul>
+
+
                                     {% endfor %}
                                 </ul>
+
+
                             </li>
                         {% endfor %}
                     </ul>

@@ -82,6 +82,16 @@
         return $app['twig']->render('edit_adventure.html.twig', array('adventure' => $adventure, 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
     });
 
+    $app->post("/location", function() use($app){
+        $adventure = Adventure::find($_POST['adventure_id']);
+        $activity = Activity::find($_POST['activity_id']);
+        $new_location = new Location($_POST['latitude'], $_POST['longitude'], $_POST['activity_id'], $id = null, $_POST['adventure_id']);
+        $new_location->save();
+        $new_location->addActivity($activity);
+        $adventure->addLocation($new_location);
+
+        return $app['twig']->render('admin.html.twig', array('adventures' => Adventure::getAll(), 'countries' => Country::getAll(), 'activities' => Activity::getAll()));
+    });
 
 
 ////////////////////////////
