@@ -13,10 +13,12 @@
             $this->access = $access;
             $this->id = $id;
         }
+
 // Getters and Setters for private properties
         function getName(){
             return $this->name;
         }
+<<<<<<< HEAD
         function setName($new_name){
             $this->name = (string) $new_name;
         }
@@ -32,6 +34,31 @@
             return $this->password;
         }
         function setPassword($new_password){
+=======
+
+        function setName($new_name)
+        {
+            $this->name = (string) $new_name;
+        }
+
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function setId($new_id)
+        {
+            $this->id = (int) $new_id;
+        }
+
+        function getPassword()
+        {
+            return $this->password;
+        }
+
+        function setPassword($new_password)
+        {
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
             $this->password = (string) $new_password;
         }
 
@@ -50,7 +77,12 @@
             $this->setId($result['id']);
         }
 
+<<<<<<< HEAD
         static function getAll(){
+=======
+        static function getAll()
+        {
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
             $statement = $GLOBALS['DB']->query("SELECT * FROM customers;");
             $all_customers = array();
             foreach($statement as $person){
@@ -63,11 +95,21 @@
             return $all_customers;
         }
 
+<<<<<<< HEAD
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM customers *;");
         }
 
         static function find($search_id){
+=======
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM customers *;");
+        }
+
+        static function find($search_id)
+        {
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
             $found_customer = null;
             $customers = Customer::getAll();
             foreach($customers as $person){
@@ -78,16 +120,27 @@
             return $found_customer;
         }
 
+<<<<<<< HEAD
         function updateName($new_name){
+=======
+        function updateName($new_name)
+        {
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
             $GLOBALS['DB']->exec("UPDATE customers SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
 
+<<<<<<< HEAD
         function updatePassword($new_password){
+=======
+        function updatePassword($new_password)
+        {
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
             $GLOBALS['DB']->exec("UPDATE customers SET password = '{$new_password}' WHERE id = {$this->getId()};");
             $this->setPassword($new_password);
         }
 
+<<<<<<< HEAD
         function delete(){
             $GLOBALS['DB']->exec("DELETE FROM customers WHERE id = {$this->getId()};");
         }
@@ -178,5 +231,21 @@
 
 
 
+=======
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM customers WHERE id = {$this->getId()};");
+        }
+
+        function getActivityPreference($activity)
+        {
+            $query = $GLOBALS['DB']->query("SELECT activity_pref FROM preferences WHERE activity_id = {$activity->getId()} AND customer_id = {$this->getId()};");
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result['activity_pref'];
+        }
+
+>>>>>>> 9d6dbe8626362c86a5391a3de1cd23ac36789f15
     }
  ?>

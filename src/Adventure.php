@@ -142,7 +142,8 @@
             {
                 $name = $element['name'];
                 $id = $element['id'];
-                $new_adventure = new Adventure($name, $id);
+                $description = $element['description'];
+                $new_adventure = new Adventure($name, $id, $description);
                 array_push($return_adventures, $new_adventure);
             }
             return $return_adventures;
@@ -164,7 +165,8 @@
             {
                 $new_name = $element['name'];
                 $new_id = $element['id'];
-                $found_adventure = new Adventure($new_name, $new_id);
+                $description = $element['description'];
+                $found_adventure = new Adventure($new_name, $new_id, $description);
             }
             return $found_adventure;
 
@@ -194,8 +196,15 @@
             $location->setAdventure_id($this->getId());
         }
 
+        // This method takes an activity as an argument and returns the activity level for that activity associated with the adventure.
+        function getActivityLevel($activity)
+        {
+            $query = $GLOBALS['DB']->query("SELECT activity_lvl FROM levels WHERE adventure_id = {$this->getId()} AND activity_id = {$activity->getId()};");
 
+            $result = $query->fetch(PDO::FETCH_ASSOC);
 
+            return $result['activity_lvl'];
+        }
 
 
 

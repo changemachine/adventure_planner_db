@@ -34,13 +34,25 @@
 // Methods to interact with the Database
 
     // General CRUD methods
+
+        // Save methods for saving activity, saving activity with level, and saving activity with customer
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO activities (name) VALUES ('{$this->getName()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
-            $GLOBALS['DB']->exec("INSERT INTO levels (activity_id)")
         }
+
+        function saveActivityLevel($adventure, $level)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO levels (activity_id, adventure_id, activity_lvl, activity_name) VALUES ({$this->getId()}, {$adventure->getId()}, {$level}, '{$this->getName()}');");
+        }
+
+        function saveActivityPreference($customer, $level)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO preferences (activity_id, customer_id, activity_pref, activity_name) VALUES ({$this->getId()}, {$customer->getId()}, {$level}, '{$this->getName()}');");
+        }
+
 
         function update($new_name)
         {
@@ -144,6 +156,7 @@
             }
             return $matching_adventures;
         }
+
 
 
 
