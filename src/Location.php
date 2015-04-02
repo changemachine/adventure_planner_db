@@ -6,14 +6,16 @@
         private $latitude;
         private $longitude;
         private $activity_id;
+        private $adventure_id;
 
 // Constructor for instances of the class
-        function __construct($latitude = 1, $longitude = 1, $activity_id = 1, $id = null)
+        function __construct($latitude = 1, $longitude = 1, $activity_id = 1, $id = null, $adventure_id = 1)
         {
             $this->latitude = $latitude;
             $this->longitude = $longitude;
             $this->activity_id = $activity_id;
             $this->id = $id;
+            $this->adventure_id = $adventure_id;
         }
 // Getters and Setters for private properties of class
         function getLongitude()
@@ -36,6 +38,11 @@
             return $this->id;
         }
 
+        function getAdventure_id()
+        {
+            return $this->adventure_id;
+        }
+
         function setLatitude($new_latitude)
         {
             $this->latitude = (float) $new_latitude;
@@ -56,12 +63,17 @@
             $this->id = (int) $new_id;
         }
 
+        function setAdventure_id($new_id)
+        {
+            $this->adventure_id = (int) $new_id;
+        }
+
 // Methods to interact with the Database
 
     // General CRUD methods
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO locations (latitude, longitude, activity_id) VALUES ({$this->getLatitude()}, {$this->getLongitude()}, {$this->getActivity_id()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO locations (latitude, longitude, activity_id, adventure_id) VALUES ({$this->getLatitude()}, {$this->getLongitude()}, {$this->getActivity_id()}, {$this->getAdventure_id()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -80,8 +92,14 @@
 
         function updateActivity_id($new_id)
         {
-            $GLOBALS['DB']->exec("UPDATE locations SET location_id = {$new_id} WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE locations SET activity_id = {$new_id} WHERE id = {$this->getId()};");
             $this->setActivity_id($new_id);
+        }
+
+        function updateAdventure_id($new_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE locations SET adventure_id = {$new_id} WHERE id = {$this->getId()};");
+            $this->setAdventure_id($new_id);
         }
         // Make sure to delete associations in join tables as well
         function delete()
@@ -102,11 +120,12 @@
 
             $returned_locations = array();
             foreach($locations as $place){
-                $longitude = $place['longitude'];
+                $longitude = floatval($place['longitude']);
                 $id = $place['id'];
                 $activity_id = $place['activity_id'];
-                $latitude = $place['latitude'];
-                $new_location = new Location($latitude, $longitude, $activity_id, $id);
+                $latitude = floatval($place['latitude']);
+                $adventure_id = $place['adventure_id'];
+                $new_location = new Location($latitude, $longitude, $activity_id, $id, $adventure_id);
                 array_push($returned_locations, $new_location);
             }
             return $returned_locations;
@@ -122,6 +141,14 @@
                 }
             }
             return $found_location;
+        }
+
+        function addActivity($activity){
+            $activity_id = $GLOBALS['DB']->query("SELECT id FROM activities WHERE name = '{$activity->getName()}';");
+            $found = $activity_id->fetch(PDO::FETCH_ASSOC);
+            $found_id = $found['id'];
+            $GLOBALS['DB']->exec("UPDATE locations SET activity_id = {$found_id} WHERE id = {$this->getId()};");
+            $this->setActivity_id($found_id);
         }
 
 

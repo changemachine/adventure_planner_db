@@ -39,6 +39,7 @@
             $statement = $GLOBALS['DB']->query("INSERT INTO activities (name) VALUES ('{$this->getName()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
+            $GLOBALS['DB']->exec("INSERT INTO levels (activity_id)")
         }
 
         function update($new_name)
@@ -143,6 +144,7 @@
             }
             return $matching_adventures;
         }
+
 
 
 

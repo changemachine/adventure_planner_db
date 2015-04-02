@@ -7,16 +7,18 @@
 
     require_once "src/Activity.php";
     require_once "src/Location.php";
+    require_once "src/Adventure.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=travel_test');
 
     class LocationTest extends PHPUnit_Framework_TestCase
     {
-        
+
         protected function tearDown()
         {
-            Activity::deleteAll();
+            Adventure::deleteAll();
             Location::deleteAll();
+            Activity::deleteAll();
         }
 
         function test_setId()
@@ -83,6 +85,23 @@
             $this->assertEquals(3, $result);
         }
 
+        function test_setAdventureID()
+        {
+            //Arrange
+            $lat = 1.1;
+            $long = 4.4;
+            $activity_id = 3;
+            $id = 1;
+            $adventure_id = 5333;
+            $test_location = new Location($lat, $long, $activity_id, $id, $adventure_id);
+            //Act
+            $test_location->setAdventure_id(30000);
+            $result = $test_location->getAdventure_id();
+
+            //Assert
+            $this->assertEquals(30000, $result);
+        }
+
         function test_save()
         {
             //Arrange
@@ -144,6 +163,28 @@
 
             //Assert
             $this->assertEquals([], $result);
+        }
+
+        function test_addActivity()
+        {
+            //Arrange
+            $lat = 1.1;
+            $long = 4.4;
+            $activity_id = 3;
+            $id = 1;
+            $test_location = new Location($lat, $long, $activity_id, $id);
+            $test_location->save();
+
+            $test_activity = new Activity("Swimming");
+            $test_activity->save();
+            //Act
+            $test_location->addActivity($test_activity);
+
+            $result = $test_activity->getId();
+
+
+            //Assert
+            $this->assertEquals($test_location->getActivity_id(), $result);
         }
 
         // function test_find()
