@@ -11,27 +11,33 @@
             $this->id = $id;
             $this->password = $password;
         }
+
 // Getters and Setters for private properties
         function getName()
         {
             return $this->name;
         }
+
         function setName($new_name)
         {
             $this->name = (string) $new_name;
         }
+
         function getId()
         {
             return $this->id;
         }
+
         function setId($new_id)
         {
             $this->id = (int) $new_id;
         }
+
         function getPassword()
         {
             return $this->password;
         }
+
         function setPassword($new_password)
         {
             $this->password = (string) $new_password;
@@ -43,6 +49,7 @@
             $result = $statement ->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
+
         static function getAll()
         {
             $statement = $GLOBALS['DB']->query("SELECT * FROM customers;");
@@ -56,10 +63,12 @@
             }
             return $all_customers;
         }
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM customers *;");
         }
+
         static function find($search_id)
         {
             $found_customer = null;
@@ -71,19 +80,31 @@
             }
             return $found_customer;
         }
+
         function updateName($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE customers SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
+
         function updatePassword($new_password)
         {
             $GLOBALS['DB']->exec("UPDATE customers SET password = '{$new_password}' WHERE id = {$this->getId()};");
             $this->setPassword($new_password);
         }
+
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM customers WHERE id = {$this->getId()};");
+        }
+
+        function getActivityPreference($activity)
+        {
+            $query = $GLOBALS['DB']->query("SELECT activity_pref FROM preferences WHERE activity_id = {$activity->getId()} AND customer_id = {$this->getId()};");
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result['activity_pref'];
         }
 
     }

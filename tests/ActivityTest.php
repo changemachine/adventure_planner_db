@@ -8,6 +8,8 @@
     require_once "src/Activity.php";
     require_once "src/Country.php";
     require_once "src/Adventure.php";
+    require_once "src/Customer.php";
+
 
     $DB = new PDO('pgsql:host=localhost;dbname=travel_test');
 
@@ -19,6 +21,7 @@
             Activity::deleteAll();
             Adventure::deleteAll();
             Country::deleteAll();
+            Customer::deleteAll();
         }
 
         function test_setId()
@@ -332,6 +335,38 @@
 
             //Assert
             $this->assertEquals([$test_country], $result);
+        }
+
+        function test_saveLevel()
+        {
+            //Arrange
+            $test_adventure = new Adventure("surfing in hawaii");
+            $test_adventure->save();
+            $test_activity = new Activity("Swim");
+            $test_activity->save();
+            $level = 9;
+
+            //Act
+            $test_activity->saveActivityLevel($test_adventure, $level);
+            $result = $test_adventure->getActivityLevel($test_activity);
+            //Assert
+            $this->assertEquals(9, $result);
+        }
+
+        function test_savePreference()
+        {
+            //Arrange
+            $test_customer = new Customer("billy the kid");
+            $test_customer->save();
+            $test_activity = new Activity("Swim");
+            $test_activity->save();
+            $preference = 9;
+
+            //Act
+            $test_activity->saveActivityPreference($test_customer, $preference);
+            $result = $test_customer->getActivityPreference($test_activity);
+            //Assert
+            $this->assertEquals(9, $result);
         }
 
 
